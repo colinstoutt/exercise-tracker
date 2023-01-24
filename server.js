@@ -23,7 +23,7 @@ require("./config/database");
 app.use("/users", usersRouter);
 app.use(require("./config/auth"));
 
-app.use("/workout", workoutRouter);
+app.use("/workouts", workoutRouter);
 
 app.get("/", (req, res) => {
   res.send("Hello world");
