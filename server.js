@@ -25,11 +25,7 @@ app.use(require("./config/auth"));
 
 app.use("/workouts", workoutRouter);
 
-// app.get("/", (req, res) => {
-//   res.send("Hello world");
-// });
-
-app.set("port", process.env.PORT || 3001);
-app.listen(app.get("port"), () => {
-  console.log(`Listening on PORT ` + app.get("port"));
+const { PORT = 3001 || 3001 } = process.env;
+app.listen(PORT, () => {
+  console.log(`Listening on PORT ${PORT}`);
 });
