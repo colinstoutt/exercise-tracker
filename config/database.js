@@ -2,10 +2,10 @@ const mongoose = require("mongoose");
 
 mongoose.connect(process.env.DATABASE_URL);
 
-let db = mongoose.connection;
+const db = mongoose.connection;
 
-// mongoose connection status messages
-db = mongoose.connection;
-db.on("error", (err) => console.log(err.message + " is mongod not running?"));
-db.on("connected", () => console.log("mongo connected"));
-db.on("disconnected", () => console.log("mongo disconnected"));
+db.on("open", () =>
+  console.log(`Connected to MongoDB on ${db.host}:${db.port}`)
+)
+  .on("close", () => console.log("Connection Closed"))
+  .on("error", (error) => console.log(error));

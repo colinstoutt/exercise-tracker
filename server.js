@@ -1,31 +1,30 @@
+// Dependencies
 const express = require("express");
-const app = express();
-const mongoose = require("mongoose");
-const morgan = require("morgan");
+const logger = require("morgan");
 const cors = require("cors");
+
+const app = express();
+
+require("dotenv").config();
+
 const workoutRouter = require("./routes/workout");
 const usersRouter = require("./routes/users");
 
-app.use(express.static("public"));
-app.use(cors());
-app.use(morgan("dev"));
-app.use(express.urlencoded({ extended: true }));
-
-require("dotenv").config();
-// mongoose connect
-mongoose.connect(process.env.DATABASE_URL, {
-  useNewUrlParser: true,
-  useUnifiedTopology: true,
-});
-
+// DB Config
 require("./config/database");
 
+// Middleware
+app.use(logger("dev"));
+app.use(express.json());
+app.use(cors());
+
+// Routers
+
 app.use("/users", usersRouter);
+// Mount our custom auth middleware to protect routes below it
 app.use(require("./config/auth"));
+app.use("/workout", workoutRouter);
 
-app.use("/workouts", workoutRouter);
-
-const { PORT = 3001 || 3001 } = process.env;
-app.listen(PORT, () => {
-  console.log(`Listening on PORT ${PORT}`);
-});
+// Listener
+const { PORT = 3001 } = process.env;
+app.listen(PORT, () => console.log(`Listening on port ${PORT}...`));
