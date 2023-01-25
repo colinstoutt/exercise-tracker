@@ -26,5 +26,5 @@ app.use(require("./config/auth"));
 app.use("/api/workout", workoutRouter);
 
 // Listener
-const PORT = process.env.PORT || 3005;
+const PORT = process.env.PORT || 8000;
 app.listen(PORT, () => console.log(`Listening on port ${PORT}...`));
