@@ -23,7 +23,7 @@ app.use(cors());
 app.use("/users", usersRouter);
 // Mount our custom auth middleware to protect routes below it
 app.use(require("./config/auth"));
-app.use("/workout", workoutRouter);
+app.use("/api/workout", workoutRouter);
 
 // Listener
 const { PORT = 3001 } = process.env;
