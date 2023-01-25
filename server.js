@@ -10,6 +10,10 @@ require("dotenv").config();
 const workoutRouter = require("./routes/workout");
 const usersRouter = require("./routes/users");
 
+app.get("/", (req, res) => {
+  res.send("Backend up and running...");
+});
+
 // DB Config
 require("./config/database");
 
