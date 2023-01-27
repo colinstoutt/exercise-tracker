@@ -25,7 +25,6 @@ app.use(cors());
 // Routers
 
 app.use("/users", usersRouter);
-// Mount our custom auth middleware to protect routes below it
 app.use(require("./config/auth"));
 app.use("/api/workouts", workoutRouter);
 
