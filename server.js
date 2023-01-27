@@ -30,6 +30,6 @@ app.use(require("./config/auth"));
 app.use("/api/workouts", workoutRouter);
 
 // Listener
-// const PORT = process.env.PORT || 3001;
-const { PORT = 3001 } = process.env;
+const PORT = process.env.PORT || 3001;
+// const { PORT = 3001 } = process.env;
 app.listen(PORT, () => console.log(`Listening on port ${PORT}...`));
