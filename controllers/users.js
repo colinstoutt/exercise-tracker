@@ -4,6 +4,15 @@ const jwt = require("jsonwebtoken");
 // Add the SECRET
 const SECRET = process.env.SECRET;
 
+const index = async (req, res) => {
+  try {
+    res.json(await User.find({}));
+  } catch (error) {
+    // send error to user
+    res.status(400).json(error);
+  }
+};
+
 const signup = async (req, res) => {
   try {
     let user = await User.create(req.body);
@@ -46,4 +55,5 @@ function createJWT(user) {
 module.exports = {
   signup,
   login,
+  index,
 };
