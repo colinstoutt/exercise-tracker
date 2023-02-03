@@ -4,7 +4,9 @@ const logger = require("morgan");
 const cors = require("cors");
 
 const app = express();
-
+app.use(cors());
+app.use(logger("dev"));
+app.use(express.json());
 require("dotenv").config();
 
 const workoutRouter = require("./routes/workout");
@@ -18,9 +20,6 @@ app.get("/", (req, res) => {
 require("./config/database");
 
 // Middleware
-app.use(logger("dev"));
-app.use(express.json());
-app.use(cors());
 
 // Routers
 

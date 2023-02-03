@@ -39,6 +39,29 @@ const create = async (req, res) => {
   }
 };
 
+const addExercise = async (req, res) => {
+  try {
+    const workout = await Workout.findById(req.params.id);
+    workout.exercises.push(req.body);
+    workout.save();
+    res.json(workout);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+};
+
+const delExercise = async (req, res) => {
+  try {
+    const { index } = req.params;
+    const workout = await Workout.findById(req.params.id);
+    workout.exercises.splice(index, 1);
+    workout.save();
+    res.json(workout);
+  } catch (error) {
+    res.status(400).json(error);
+  }
+};
+
 // Show
 const show = async (req, res) => {
   try {
@@ -54,4 +77,6 @@ module.exports = {
   update,
   create,
   show,
+  addExercise,
+  delExercise,
 };
